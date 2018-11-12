@@ -1,7 +1,131 @@
 // tslint:disable:member-access
 // tslint:disable:no-namespace
+
+declare class Java {
+    static type<T>(package: string): T;
+}
+
+declare namespace java {
+    /**
+     * https://docs.oracle.com/javase/7/docs/api/java/util/class-use/UUID.html
+     * java.util.UUID
+     */
+    class UUID {
+        static randomUUID(): UUID;
+        toString(): string;
+    }
+
+    /**
+     * http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/exceptions/IErrorCode.html
+     * com.smartfoxserver.v2.exceptions.IErrorCode
+     */
+    class IErrorCode {
+        getId(): number;
+    }
+
+    /**
+     * http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/exceptions/SFSErrorCode.html
+     * com.smartfoxserver.v2.exceptions.SFSErrorCode
+     */
+    class SFSErrorCode extends IErrorCode {
+        static readonly BUDDY_BLOCK_FAILURE: SFSErrorCode;
+        static readonly BUDDY_LIST_FULL: SFSErrorCode;
+        static readonly BUDDY_LIST_LOAD_FAILURE: SFSErrorCode;
+        static readonly BUDDY_TOO_MANY_VARIABLES: SFSErrorCode;
+        static readonly CREATE_ROOM_BAD_GROUP: SFSErrorCode;
+        static readonly CREATE_ROOM_EXCEED_USER_LIMIT: SFSErrorCode;
+        static readonly CREATE_ROOM_WRONG_PARAMETER: SFSErrorCode;
+        static readonly CREATE_ROOM_ZONE_FULL: SFSErrorCode;
+        static readonly GENERIC_ERROR: SFSErrorCode;
+        static readonly HANDSHAKE_API_OBSOLETE: SFSErrorCode;
+        static readonly INVITATION_NOT_VALID: SFSErrorCode;
+        static readonly JOIN_ALREADY_JOINED: SFSErrorCode;
+        static readonly JOIN_BAD_PASSWORD: SFSErrorCode;
+        static readonly JOIN_BAD_ROOM: SFSErrorCode;
+        static readonly JOIN_GAME_ACCESS_DENIED: SFSErrorCode;
+        static readonly JOIN_GAME_NOT_FOUND: SFSErrorCode;
+        static readonly JOIN_ROOM_FULL: SFSErrorCode;
+        static readonly JOIN_ROOM_LOCKED: SFSErrorCode;
+        static readonly LOGIN_ALREADY_LOGGED: SFSErrorCode;
+        static readonly LOGIN_BAD_PASSWORD: SFSErrorCode;
+        static readonly LOGIN_BAD_USERNAME: SFSErrorCode;
+        static readonly LOGIN_BAD_ZONENAME: SFSErrorCode;
+        static readonly LOGIN_BANNED_IP: SFSErrorCode;
+        static readonly LOGIN_BANNED_USER: SFSErrorCode;
+        static readonly LOGIN_GUEST_NOT_ALLOWED: SFSErrorCode;
+        static readonly LOGIN_INACTIVE_ZONE: SFSErrorCode;
+        static readonly LOGIN_NAME_CONTAINS_BAD_WORDS: SFSErrorCode;
+        static readonly LOGIN_SERVER_FULL: SFSErrorCode;
+        static readonly LOGIN_ZONE_FULL: SFSErrorCode;
+        static readonly ROOM_CAPACITY_CHANGE_PERMISSION_ERR: SFSErrorCode;
+        static readonly ROOM_DUPLICATE_NAME: SFSErrorCode;
+        static readonly ROOM_NAME_BAD_SIZE: SFSErrorCode;
+        static readonly ROOM_NAME_CHANGE_PERMISSION_ERR: SFSErrorCode;
+        static readonly ROOM_NAME_CONTAINS_BADWORDS: SFSErrorCode;
+        static readonly ROOM_PASS_CHANGE_PERMISSION_ERR: SFSErrorCode;
+        static readonly SUBSCRIBE_GROUP_ALREADY_SUBSCRIBED: SFSErrorCode;
+        static readonly SUBSCRIBE_GROUP_NOT_FOUND: SFSErrorCode;
+        static readonly SWITCH_NO_PLAYER_SLOTS_AVAILABLE: SFSErrorCode;
+        static readonly SWITCH_NO_SPECTATOR_SLOTS_AVAILABLE: SFSErrorCode;
+        static readonly SWITCH_NOT_A_GAME_ROOM: SFSErrorCode;
+        static readonly SWITCH_NOT_JOINED_IN_ROOM: SFSErrorCode;
+        static readonly UNSUBSCRIBE_GROUP_NOT_FOUND: SFSErrorCode;
+        static readonly UNSUBSCRIBE_GROUP_NOT_SUBSCRIBED: SFSErrorCode;
+    }
+
+    /**
+     * http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/exceptions/SFSErrorData.html
+     * com.smartfoxserver.v2.exceptions.SFSErrorData
+     */
+    class SFSErrorData {
+        constructor(code: IErrorCode);
+        addParameter(parameter: string): void;
+        getCode(): IErrorCode;
+        getParams(): string[];
+        setCode(code: IErrorCode): void;
+        setParams(params: string[]): void;
+    }
+
+    /**
+     * http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/exceptions/SFSException.html
+     * com.smartfoxserver.v2.exceptions.SFSException
+     */
+    class SFSException {
+        constructor(message?: string, data?: SFSErrorData);
+        getErrorData(): SFSErrorData;
+    }
+
+    /**
+     * http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/exceptions/SFSLoginException.html
+     * com.smartfoxserver.v2.exceptions.SFSLoginException
+     */
+    class SFSLoginException extends SFSException {
+        constructor(message?: string, data?: SFSErrorData);
+    }
+
+    /** com.smartfoxserver.v2.core.SFSConstants */
+    class SFSConstants {
+        static readonly REQUEST_LOGIN_DATA_OUT: string;
+        static readonly NEW_LOGIN_NAME: string;
+        static readonly SESSION_CLIENT_TYPE: string;
+        static readonly DEFAULT_PLAYER_ID_GENERATOR: string;
+        static readonly CLIENT_UNKNOWN_TYPE: string;
+        static readonly REQUEST_UDP_PACKET_ID: string;
+        static readonly STORAGE_DATA_FOLDER: string;
+        static readonly BLUEBOX_CONNECTION_MANAGER_INSTANCE: string;
+        static readonly CCU_LOGGER_RUN_INTERVAL: number;
+        static readonly LOG_ANALYSIS_RUN_CHECK_INTERVAL: number;
+        static readonly ATTR_ENCRYPTED: string;
+        static readonly SESSION_PERMISSION: string;
+        static readonly SESSION_FAILED_LOGINS_COUNT: string;
+        static readonly SESSION_GEOLOCATION: string;
+        static readonly PROP_SERVICE_PROVIDER: string;
+    }
+}
+
 /**
  * http://docs2x.smartfoxserver.com/api-docs/jsdoc/server/global.html#BanMode
+ * http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/entities/managers/BanMode.html
  *
  * The BanMode enum lists all possible user banning modes.
  */
@@ -131,6 +255,79 @@ declare enum SFSEventType {
     USER_RECONNECTION_SUCCESS,
     USER_RECONNECTION_TRY,
     USER_VARIABLES_UPDATE,
+}
+
+/** http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/core/ISFSEventParam.html */
+declare class ISFSEventParam {
+}
+
+/** http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/core/SFSEventParam.html */
+declare class SFSEventParam extends ISFSEventParam {
+    /** A reason for the disconnection event, where applicable (ClientDisconnectionReason). */
+    static readonly DISCONNECTION_REASON: SFSEventParam;
+
+    /** The list of joined Rooms of a User that was disconnected (List of Room). */
+    static readonly JOINED_ROOMS: SFSEventParam;
+
+    /** The custom data sent at login time (SFSObject). */
+    static readonly LOGIN_IN_DATA: SFSEventParam;
+
+    /** The user name sent at login time (String). */
+    static readonly LOGIN_NAME: SFSEventParam;
+
+    /** The custom data to return to the user after a successful login (SFSObject). */
+    static readonly LOGIN_OUT_DATA: SFSEventParam;
+
+    /** The user password sent at login time (String). */
+    static readonly LOGIN_PASSWORD: SFSEventParam;
+
+    /** The chat message (String). */
+    static readonly MESSAGE: SFSEventParam;
+
+    /** An object with extra data (ISFSObject) */
+    static readonly OJBECT: SFSEventParam;
+
+    /** The PlayerId (Integer). */
+    static readonly PLAYER_ID: SFSEventParam;
+
+    /** A map of PlayerId by Room (Map) of Room, Integer. */
+    static readonly PLAYER_IDS_BY_ROOM: SFSEventParam;
+
+    /** The recipient of a message (User). */
+    static readonly RECIPIENT: SFSEventParam;
+
+    /** The Room in which the event was fired, where applicable (Room). */
+    static readonly ROOM: SFSEventParam;
+
+    /** The User Session (Session). */
+    static readonly SESSION: SFSEventParam;
+
+    /** List of uploaded files as List<UploadedFile> (List). */
+    static readonly UPLOAD_FILE_LIST: SFSEventParam;
+
+    /** Custom HTTP parameters passed in the upload HTTP POST call. */
+    static readonly UPDATE_HTTP_PARAMS: SFSEventParam;
+
+    /** The User that generated the event (User). */
+    static readonly USER: SFSEventParam;
+
+    /** A list of server variables (List). */
+    static readonly VARIABLES: SFSEventParam;
+
+    /** A list of server variables in map (key/value) form (Map). */
+    static readonly VARIABLES_MAP: SFSEventParam;
+
+    /** The Zone in which the event was fired (Zone). */
+    static readonly ZONE: SFSEventParam;
+}
+
+/** http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/buddylist/SFSBuddyEventParam.html */
+declare class SFSBuddyEventParam extends ISFSEventParam {
+    static readonly BUDDY: SFSBuddyEventParam;
+    static readonly BUDDY_BLOCK_STATUS: SFSBuddyEventParam;
+    static readonly BUDDY_IS_ONLINE: SFSBuddyEventParam;
+    static readonly BUDDY_LIST: SFSBuddyEventParam;
+    static readonly BUDDY_STATE: SFSBuddyEventParam;
 }
 
 /**
@@ -290,7 +487,7 @@ declare function getCurrentFolder(): string;
  *
  * @returns A reference to the  SFSDBManager class instance.
  */
-declare function getDBManager(): SFSDBManager;
+declare function getDBManager(): IDBManager;
 
 /**
  * http://docs2x.smartfoxserver.com/api-docs/jsdoc/server/global.html#getFileApi
@@ -382,22 +579,8 @@ declare function setThreadSafe(value: boolean): void;
  */
 declare function trace(...arguments: any[]): void;
 
-/**
- * http://docs2x.smartfoxserver.com/api-docs/jsdoc/server/global.html#trace
- */
-
-/**
- * http://docs2x.smartfoxserver.com/api-docs/jsdoc/server/SFSArray.html
- *
- * SFSObject and SFSArray classes represent a platform-neutral, high level Java objects that abstract the data transport
- * between client and server. They are used to respectively represent data in form of a map and a list; they can be
- * nested and transport many different data types.
- *
- * These objects provide high speed serialization using the default SmartFoxServer binary protocol and the types
- * distinction grants a fine-grained size control of data sent over the network.
- */
-declare class SFSArray {
-    constructor();
+/** http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/entities/data/ISFSArray.html */
+declare class ISFSArray {
     addBool(value: boolean): void;
     addBoolArray(value: boolean[]): void;
     addByte(value: number): void;
@@ -442,10 +625,28 @@ declare class SFSArray {
     getHexDump(): string;
     isNull(index: number): boolean;
     size(): number;
+    toBinary(): Uint8Array;
+    toJson(): string;
+}
+
+/**
+ * http://docs2x.smartfoxserver.com/api-docs/jsdoc/server/SFSArray.html
+ * http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/entities/data/SFSArray.html
+ *
+ * SFSObject and SFSArray classes represent a platform-neutral, high level Java objects that abstract the data transport
+ * between client and server. They are used to respectively represent data in form of a map and a list; they can be
+ * nested and transport many different data types.
+ *
+ * These objects provide high speed serialization using the default SmartFoxServer binary protocol and the types
+ * distinction grants a fine-grained size control of data sent over the network.
+ */
+declare class SFSArray extends ISFSArray {
+    constructor();
     toString(): string;
 }
 
-declare class SFSObject {
+/** http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/entities/data/ISFSObject.html */
+declare class ISFSObject {
     containsKey(key: string): boolean;
     getBool(key: string): boolean | null;
     getBoolArray(key: string): boolean[] | null;
@@ -492,6 +693,23 @@ declare class SFSObject {
     putUtfStringArray(key: string, value: string[]): void;
     removeElement(key: string): boolean;
     size(): number;
+    toBinary(): Uint8Array;
+    toJson(): string;
+}
+
+/**
+ * http://docs2x.smartfoxserver.com/api-docs/jsdoc/server/SFSObject.html
+ * http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/entities/data/SFSObject.html
+ *
+ * SFSObject and SFSArray classes represent a platform-neutral, high level Java objects that abstract the data transport
+ * between client and server. They are used to respectively represent data in form of a map and a list; they can be
+ * nested and transport many different data types.
+ *
+ * These objects provide high speed serialization using the default SmartFoxServer binary protocol and the types
+ * distinction grants a fine-grained size control of data sent over the network.
+ */
+declare class SFSObject extends ISFSObject {
+    constructor();
     toString(): string;
 }
 
@@ -1054,21 +1272,32 @@ declare class Session {
 declare class MMOApi {
 }
 
-/** http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/db/SFSDBManager.html */
-declare class SFSDBManager {
-    executeInsert(sql: string, ...params: any[]): void;
-    executeQuery(sql: string, ...params: any[]): SFSArray;
-    executeUpdate(sql: string, ...params: any[]): void;
-    getActiveConnections(): number;
-    getIdleConnections(): number;
-    getName(): string;
-    isActive(): boolean;
-    setName(name: string): void;
+/** http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/core/ISFSEvent.html */
+declare class ISFSEvent {
+    /**
+     * Get a parameter from the event object.
+     * @param id The id/name of the parameter.
+     * @returns The parameter value.
+     */
+    getParameter<T>(id: SFSEventParam): T;
+
+    /**
+     * Get the type of the event.
+     * @returns The type of the event.
+     */
+    getType(): SFSEventType;
 }
 
-/** http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/core/SFSEvent.html */
-declare class SFSEvent {
-    getType(): SFSEventType;
+/**
+ * http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/core/SFSEvent.html
+ *
+ * The SFSEvent represents a Server side event. The SFS2X framework provide a large selection of events that any
+ * Extension can listen to in order to react to various changes happening at runtime. For example server events can
+ * notify the creation or destruction of a Room, the disconnection of a User, the login of a client and much more.
+ */
+declare class SFSEvent extends ISFSEvent {
+    constructor(type: SFSEventType);
+
     toString(): string;
 }
 
@@ -1092,15 +1321,53 @@ declare class SFSGame extends SFSRoom {
     toString(): string;
 }
 
+declare class UserVariable {
+}
+
+/** http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/entities/User.html */
 declare class User {
     addCreatedRoom(room: Room): void;
     addJoinedRomo(romo: Room): void;
     addPersistentRoomVarReference(target: Room): void;
+    containsProperty(key: any): boolean;
     containsVariable(varName: string): boolean;
+    getBadWordsWarnings(): number;
     getCreatedRooms(): Room[];
     getDump(): string;
     getFloodWarnings(): number;
     getId(): number;
+    getIdAddress(): string;
+    getJoinedRooms(): Room[];
+    getLastJoinedRoom(): Room;
+    getLastProxyList(): User[];
+    getLastRequestTime(): number;
+    getLoginTime(): number;
+    getMaxAllowedVariables(): number;
+    getName(): string;
+    getOwnedRoomsCount(): number;
+    getPersistentRoomVarReferences(): number[];
+    getPlayerId(): number;
+    getPrivilegeId(): number;
+    getProeprty(key: any): any;
+    getSession(): ISession;
+    getSubscribedGroups(): string[];
+    getUserVariablesData(): ISFSArray;
+    getVariable(key: string): UserVariable;
+    getVariables(): UserVariable[];
+    getVariablesCount(): number;
+    getZone(): Zone;
+    isBeingKicked(): boolean;
+    isConnected(): boolean;
+    isJoinedInRoom(room: Room): boolean;
+    isJoining(): boolean;
+    isLocal(): boolean;
+    isNpc(): boolean;
+    isPlayer(room?: Room): boolean;
+    isSpectator(room?: Room): boolean;
+    isSubscribedToGroup(groupId: string): boolean;
+    isSuperUser(): boolean;
+    removeCreatedRoom(room: Room): void;
+    removeJoinedRoom(room: Room): void;
 }
 
 declare class UserManager {
@@ -1147,5 +1414,268 @@ declare class SFSRoom extends Room {
 declare class SFSExtension {
 }
 
-declare class SFSZone {
+/** http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/entities/Zone.html */
+declare class Zone {
+    checkAndRemove(room: Room): void;
+    containsGroup(groupId: string): boolean;
+    containsProperty(key: any): boolean;
+    containsPublicGroup(groupId: string): boolean;
+    createRoom(params: CreateRoomSettings, user?: User): Room;
+    getDBManager(): IDBManager;
+    getDefaultGroups(): string[];
+    getDefaultPlayerIdGeneratorClassName(): string;
+    getDump(): string;
+    getGameRoomCount(): number;
+    getGroups(): string[];
+    getGuestUserNamePrefix(): string;
+    getId(): number;
+    getMaxAllowedRooms(): number;
+    getMaxAllowedUsers(): number;
+    getMaxFailedLogins(): number;
+    getMaxInvitationsPerRequest(): number;
+    getMaxRoomNameChars(): number;
+    getMaxRoomsCreatedPerUserLimit(): number;
+    getMaxRoomVariablesAllowed(): number;
+    getMaxUserIdleTime(): number;
+    getMaxUserVariablesAllowed(): number;
+    getMinRoomNameChars(): number;
+    getName(): string;
+    getProperty(key: any): any;
+    getPublicGroups(): string[];
+    getRoomById(id: number): Room;
+    getRoomByName(name: string): Room;
+    getRoomList(): Room[];
+    getRoomListFromGroup(groupId: string): Room[];
+    getRoomManager(): IRoomManager;
+    getRoomPersistenceApi(): IRoomStorage;
+    getSessionList(): ISession[];
+    getSessionsInGroup(groupId: string): ISession[];
+    getSessionsListeningToGroup(groupId: string): ISession[];
+    getTotalRoomCount(): number;
+    getUserById(id: number): User;
+    getUserByName(name: string): User;
+    getUserBySession(session: ISession): User;
+    getUserCount(): number;
+    getUserCountChangeUpdateInterval(): number;
+    getUserList(): User[];
+    getUserManager(): IUserManager;
+    getUserReconnectionSeconds(): number;
+    getUsersInGroup(groupId: string): User[];
+    getZoneManager(): IZoneManager;
+    isActive(): boolean;
+    isAllowInvitationsOnlyForBuddies(): boolean;
+    isClientAllowedToOverridRoomEvents(): boolean;
+    isCustomLogin(): boolean;
+    isEncrypted(): boolean;
+    isFilterBuddyMessages(): boolean;
+    isFilterChainInited(): boolean;
+    isFilterPrivateMessages(): boolean;
+    isFilterRoomNames(): boolean;
+    isFilterUserNames(): boolean;
+    isForceLogout(): boolean;
+    isGeoLocationEnabled(): boolean;
+    isGroupEventSet(groupId: string, eventToCheck: SFSRoomEvents): boolean;
+    isGuestUserAllowed(): boolean;
+    isUploadEnabled(): boolean;
+    removeAllUsers(): void;
+    removeProperty(key: any): void;
+    resetSystemFilterChain(): void;
+    setActive(flag: boolean): void;
+    setAllowInvitationsOnlyFOrBuddies(allowInvitationsOnlyForBuddies: boolean): void;
+    setCLientAllowedToOverridRoomEvents(flag: boolean): void;
+    setCustomLogin(flag: boolean): void;
+    setDefaultGroups(groupIds: string[]): void;
+    setDefaultPlayerIdGeneratorClassName(className: string): void;
+    setEncrypted(value: boolean): void;
+    setFilterBuddyMessages(flag: boolean): void;
+    setFilterPrivateMessages(flag: boolean): void;
+    setFilterRoomNames(flag: boolean): void;
+    setFilterUserNames(flag: boolean): void;
+    setForceLogout(flag: boolean): void;
+    setGeoLocationEnabled(value: boolean): void;
+    setGuestUserAllowed(flag: boolean): void;
+    setGuestUserNamePrefix(prefix: string): void;
+    setId(id: number): void;
+    setMaxAllowedRooms(max: number): void;
+    setMaxAllowedUsers(max: number): void;
+    setMaxFailedLogins(value: number): void;
+    setMaxInvitationsPerRequest(maxInvitationsPerRequest: number): void;
+    setMaxRoomNameChars(max: number): void;
+    setMaxRoomsCreatedPerUserLimit(max: number): void;
+    setMaxRoomVariablesAllowed(max: number): void;
+    setMaxUserIdleTime(seconds: number): void;
+    setMaxUserVariablesAllowed(max: number): void;
+    setMinRoomNameChars(min: number): void;
+    setProperty(key: any, value: any): void;
+    setPublicGroups(groupIds: string[]): void;
+    setUploadEnabled(val: boolean): void;
+    setUserCountCHangeUpdateInterval(interval: number): void;
+    setUserReconnectionSeconds(seconds: number): void;
+    setZoneManager(manager: IZoneManager): void;
+    validateUserName(name: string): void;
+}
+
+/**
+ * http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/entities/SFSZone.html
+ *
+ * The Zone represent an application running in the Server, from a simple chat application to a large scale MMO with
+ * dozens of games. Each Zone can contain any number of Rooms organized in Room Groups.
+ */
+declare class SFSZone extends Zone {
+    constructor(name: string);
+}
+
+/** http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/db/IDBManager.html */
+declare class IDBManager {
+    /** Executes a SQL INSERT command returning the key of the inserted row. */
+    executeInsert(sql: string, ...params: any[]): any;
+
+    /** Perform a SQL query and return a structured object based on SFSArray and SFSObject. */
+    executeQuery(sql: string, ...params: any[]): ISFSArray;
+
+    /** Executes a non-query SQL command such as INSERT, UPDATE, DELETE etc... */
+    executeUpdate(sql: string, ...params: any[]): void;
+
+    /** True if the Service is active. */
+    isActive(): boolean;
+}
+
+/**
+ * http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/db/SFSDBManager.html
+ *
+ * SFSDBManager is the default implementation of the IDBManager interface provided by the SFS2X platform.
+ *
+ * It manages the connection to a database using either JDBC native drivers or JDBC-ODBC bridge and providing
+ * configurable connection pooling for optimal performance and resource usage.
+ *
+ * Each Zone runs its own DbManager which can be configured via the Zone Configurator module in the SFS2X AdminTool.
+ * Additionally a Zone can instantiate multiple DbManagers via server side code. A typical scenario for this is when the
+ * application requires to connect to multiple databases.
+ */
+declare class SFSDBManager extends IDBManager {
+    /** Get the number of pooled connections currently active. */
+    getActiveConnections(): number;
+
+    /** Get the number of pooled connections currently idle. */
+    getIdleConnections(): number;
+
+    /** Get the service name. */
+    getName(): string;
+
+    /** Set the service name. */
+    setName(name: string): void;
+}
+
+declare class IRoomManager {
+}
+
+declare class IRoomStorage {
+}
+
+declare class IUserManager {
+}
+
+/** http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/bitswarm/sessions/SessionType.html */
+declare enum SessionType {
+    /** A http tunneled session, not using persistent socket. */
+    BLUEBOX,
+
+    /** A default, persistent socket connection, using TCP and UDP protocols. */
+    DEFAULT,
+
+    /** A non-network based session. */
+    VOID,
+
+    /** Websocket session. */
+    WEBSOCKET,
+}
+
+/** http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/bitswarm/sessions/ISession.html */
+declare class ISession {
+    addDroppedMessages(amount: number): void;
+    addReadBytes(amount: number): void;
+    addWrittenBytes(amount: number): void;
+    close(): void;
+    freeze(): void;
+    getAddress(): string;
+    getClientPort(): number;
+    getCreationTime(): number;
+    getCryptoKey(): any;
+    getDroppedMessages(): number;
+    getFreezeTime(): number;
+    getFullIpAddress(): string;
+    getFullServerIpAddress(): string;
+    getHashId(): string;
+    getId(): number;
+    getLastActivityTime(): number;
+    getLastLoggedInActivityTime(): number;
+    getLastReadTime(): number;
+    getLastWriteTime(): number;
+    getMaxIdleTime(): number;
+    getMaxLoggedInIdleTime(): number;
+    getNodeId(): string;
+    getProperty(key: string): any;
+    getReadBytes(): number;
+    getReconnectionSeconds(): number;
+    getServerAddress(): string;
+    getServerPort(): number;
+    getSessionManager(): ISessionManager;
+    getSystemProperty(key: string): any;
+    getType(): SessionType;
+    getWrittenBytes(): number;
+    isConnected(): boolean;
+    isEncrypted(): boolean;
+    isFrozen(): boolean;
+    isIdle(): boolean;
+    isLocal(): boolean;
+    isLoggedIn(): boolean;
+    isMarkedForEviction(): boolean;
+    isReconnectionTimeExpired(): boolean;
+    isUdpEnabled(): boolean;
+    removeProperty(key: string): void;
+    removeSystemProperty(key: string): void;
+    setConnected(value: boolean): void;
+    setCreationTime(timestamp: number): void;
+    setCryptoKey(key: any): void;
+    setHashId(hash: string): void;
+    setId(id: number): void;
+    setLastActivityTime(timestamp: number): void;
+    setLastLoggedInActivityTime(timestamp: number): void;
+    setLastReadTime(timestamp: number): void;
+    setLastWriteTime(timestamp: number): void;
+    setLoggedIn(value: boolean): void;
+    setMarktedForEviction(): void;
+    setMaxIdleTime(idleTime: number): void;
+    setMaxLoggedInIdleTime(idleTime: number): void;
+    setNodeId(nodeId: string): void;
+    setProperty(key: string, property: any): void;
+    setReconnectionSeconds(value: number): void;
+    setSessionManager(manager: ISessionManager): void;
+    setSystemProperty(key: string, property: any): void;
+    setType(type: SessionType): void;
+    unfreeze(): void;
+}
+
+declare class ISessionManager {
+}
+
+declare class IZoneManager {
+}
+
+/** http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/entities/SFSRoomEvents.html */
+declare enum SFSRoomEvents {
+    /** This event is notified every time a Room password is changed. */
+    PASSWORD_STATE_CHANGE,
+
+    /** This event is notified every time the capacity of Room is changed. */
+    ROOM_CAPACITY_CHANGE,
+
+    /** This event is notified every time a Room name is changed. */
+    ROOM_NAME_CHANGE,
+
+    /** This event is notified every time one or more Variables are modified in the Room. */
+    ROOM_VARIABLES_UPDATE,
+
+    /** This event is notified every time when the Room user/spectator count changes. */
+    USER_COUNT_CHANGE,
 }
