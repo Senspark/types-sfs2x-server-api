@@ -201,24 +201,59 @@ declare enum InvitationResponse {
  * The RoomProperties object lists all Room properties that can be queried using a Match Expression.
  */
 declare enum RoomProperties {
+    /** The id of Group to which the Room belongs. */
     GROUP_ID,
+
+    /** The Room has at least one free player slot. */
     HAS_FREE_PLAYER_SLOTS,
+
+    /** The Room's isGame flag. */
     IS_GAME,
+
+    /** The Room's isPrivate flag. */
     IS_PRIVATE,
+
+    /** The Room is of type SFSGame. */
     IS_TYPE_SFSGAME,
+
+    /** The Room's max number of spectators. */
     MAX_SPECTATORS,
+
+    /** The Room's max number of users. */
     MAX_USERS,
+
+    /** The name of the Room. */
     NAME,
+
+    /** The number of spectators in the Room. */
     SPECTATOR_COUNT,
+
+    /** The number of users in the Room. */
     USER_COUNT,
 }
 
+/**
+ * http://docs2x.smartfoxserver.com/api-docs/jsdoc/server/global.html#UserProperties
+ *
+ * The UserProperties object lists all User properties that can be queried using a Match Expression.
+ */
 declare enum UserProperties {
+    /** The user is currently joined in at least one Room. */
     IS_IN_ANY_ROOM,
+
+    /** The user is a Non-Player Character. */
     IS_NPC,
+
+    /** The user is a player in the joined Room. */
     IS_PLAYER,
+
+    /** The user is a spectator in the joined Room. */
     IS_SPECTATOR,
+
+    /** The name of the user. */
     NAME,
+
+    /** The user's privilege id. */
     PRIVILEGE_ID,
 }
 
@@ -228,32 +263,91 @@ declare enum UserProperties {
  * The SFSEventType object lists all server-side events dispatched to an Extension, provided an handler was registered.
  */
 declare enum SFSEventType {
+    /** The event fired when a user is added in the Buddy List of another client. */
     BUDDY_ADD,
+
+    /** The event fired when a Buddy is blocked in user's Buddy List. */
     BUDDY_BLOCK,
+
+    /** The event fired when a user initializes his Buddy List. */
     BUDDY_LIST_INIT,
+
+    /** The event fired when a Buddy Message is exchanged between two buddies. */
     BUDDY_MESSAGE,
+
+    /** The event fired when a buddy changes his online state. */
     BUDDY_ONLINE_STATE_UPDATE,
+
+    /** The event fired when a user is removed in the Buddy List of another client. */
     BUDDY_REMOVE,
+
+    /** The event fired when one or more Buddy Variables are set by a user. */
     BUDDY_VARIABLES_UPDATE,
+
+    /** The event fired when one or more files have been uploaded by a user connected in the current Zone. */
     FILE_UPLOAD,
+
+    /** The event fired after a private SFSGame has finished the cycle of invitations with an error. */
     GAME_INVITATION_FAILURE,
+
+    /** The event fired after a private SFSGame has finished the cycle of invitations successfully. */
     GAME_INVITATION_SUCCESS,
+
+    /** The event fired when a user joined in a Game Room as a player is turned into a spectator. */
     PLAYER_TO_SPECTATOR,
+
+    /** The event fired when a private message is sent by a client. */
     PRIVATE_MESSAGE,
+
+    /** The event fired when a public message is sent by a client. */
     PUBLIC_MESSAGE,
+
+    /** The event fired after a new Room was created in the current Zone. */
     ROOM_ADDED,
+
+    /** The event fired after a Room was removed from the current Zone. */
     ROOM_REMOVED,
+
+    /** The event fired when one or more Room Variables are set. */
     ROOM_VARIABLES_UPDATE,
+
+    /** The event fired when SmartFoxServer has completed the boot phase. */
     SERVER_READY,
+
+    /** The event fired when a user joined in a Game Room as a spectator is turned into a player. */
     SPECTATOR_TO_PLAYER,
+
+    /** The event fired after a user disconnects himself or is disconnected. */
     USER_DISCONNECT,
+
+    /** The event fired after a user has joined a Room. */
     USER_JOIN_ROOM,
+
+    /** The event fired after a successful user login. */
     USER_JOIN_ZONE,
+
+    /** The event fired after a user has left a Room. */
     USER_LEAVE_ROOM,
+
+    /** The event fired when a user sends a login request. */
     USER_LOGIN,
+
+    /** The event fired after a user logged out of the current Zone. */
     USER_LOGOUT,
+
+    /**
+     * The event fired when the HRC system is active and a client was successfully reconnected (feature not available
+     * for JavaScript clients).
+     */
     USER_RECONNECTION_SUCCESS,
+
+    /**
+     * The event fired when the HRC system is active and a client is trying to reconnect (feature not available for
+     * JavaScript clients).
+     */
     USER_RECONNECTION_TRY,
+
+    /** The event fired when one or more User Variables are set. */
     USER_VARIABLES_UPDATE,
 }
 
@@ -336,9 +430,19 @@ declare class SFSBuddyEventParam extends ISFSEventParam {
  * The SFSRoomRemoveMode enum lists all possible auto-removal modes of dynamically created Rooms.
  */
 declare enum SFSRoomRemoveMode {
+    /**
+     * A regular Room is removed when it is empty and its creator is not connected anymore, while instead a game Room is
+     * removed when it is empty.
+     */
     DEFAULT,
+
+    /** The Room is never removed (use with caution). */
     NEVER_REMOVE,
+
+    /** The Room is removed immediately when the last user leaves it. */
     WHEN_EMPTY,
+
+    /** The Room is removed when it is empty and its creator is not connected anymore. */
     WHEN_EMPTY_AND_CREATOR_IS_GONE,
 }
 
