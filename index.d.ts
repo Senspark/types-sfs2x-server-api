@@ -1632,13 +1632,13 @@ declare class SFSZone extends Zone {
 /** http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/db/IDBManager.html */
 declare class IDBManager {
     /** Executes a SQL INSERT command returning the key of the inserted row. */
-    executeInsert(sql: string, ...params: any[]): any;
+    executeInsert(sql: string, params: any[]): any;
 
     /** Perform a SQL query and return a structured object based on SFSArray and SFSObject. */
-    executeQuery(sql: string, ...params: any[]): ISFSArray;
+    executeQuery(sql: string, params: any[]): ISFSArray;
 
     /** Executes a non-query SQL command such as INSERT, UPDATE, DELETE etc... */
-    executeUpdate(sql: string, ...params: any[]): void;
+    executeUpdate(sql: string, params: any[]): void;
 
     /** True if the Service is active. */
     isActive(): boolean;
