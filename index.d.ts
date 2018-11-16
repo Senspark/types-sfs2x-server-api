@@ -813,6 +813,10 @@ declare class ISFSObject {
  * distinction grants a fine-grained size control of data sent over the network.
  */
 declare class SFSObject extends ISFSObject {
+    static newFromBinaryData(bytes: Uint8Array): SFSObject;
+    static newFromJsonData(jsonStr: string): ISFSObject;
+    static newFromObject(o: any): SFSObject;
+    static newInstance(): SFSObject;
     constructor();
     toString(): string;
 }
