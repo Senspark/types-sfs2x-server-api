@@ -1095,6 +1095,9 @@ declare class FileApi {
     writeTextFile(filePath: string, data: string): void;
 }
 
+declare class ISFSGameApi {
+}
+
 /**
  * http://docs2x.smartfoxserver.com/api-docs/jsdoc/server/GameApi.html
  *
@@ -1212,6 +1215,9 @@ declare class GameApi {
     ): void;
 }
 
+declare class ISFSApi {
+}
+
 /**
  * http://docs2x.smartfoxserver.com/api-docs/jsdoc/server/SFSApi.html
  *
@@ -1219,7 +1225,7 @@ declare class GameApi {
  * methods for interacting with the server: creating Rooms, joining them, logging in/out, handling messages, creating
  * User/Room Variables and much more.
  */
-declare class SFSApi {
+declare class SFSApi extends ISFSApi {
     banUser(userToBan: SFSUser, modUser: SFSUser, banMessage: string, mode: BanMode, delaySeconds: number): void;
     changeRoomCapacity(owner: SFSUser, targetRoom: SFSRoom, maxUsers: number, maxSpectators: number): void;
     changeRoomName(owner: SFSUser, targetRoom: SFSRoom, newName: string): void;
@@ -1641,10 +1647,62 @@ declare class SFSRoom extends Room {
     toString(): string;
 }
 
-declare class ISFSExtension {
+declare class ISFSEventListener {
 }
 
-declare class SFSExtension extends ISFSExtension {
+/** http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/extensions/filter/IFilter.html */
+declare class IFilter {
+    destroy(): void;
+    init(ext: SFSExtension): void;
+}
+
+// tslint:disable-next-line:max-line-length
+/** http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/extensions/filter/SFSExtensionFilter.html */
+declare class SFSExtensionFilter extends IFilter {
+    constructor();
+    getName(): string;
+    setName(name: string): void;
+}
+
+/** http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/extensions/ISFSExtension.html */
+declare class ISFSExtension {
+    addEventListener(eventType: SFSEventType, listener: ISFSEventListener): void;
+    destroy(): void;
+    getExtensionFileName(): string;
+    getName(): string;
+    getParentRoom(): Room;
+    getParentZone(): Zone;
+    getPropertiesFileName(): string;
+    handleClientRequest(cmdName: string, sender: User, params: ISFSObject): void;
+    handleInternalMessage(cmdName: string, params: any): void;
+    init(): void;
+    isActive(): boolean;
+    removeEventListener(eventType: SFSEventType, listener: ISFSEventListener): void;
+    send(cmdName: string, params: ISFSObject, recipients: User[] | User, useUDP?: boolean): void;
+    setActive(flag: boolean): void;
+    setExtensionFileName(fileName: string): void;
+    setName(name: string): void;
+    setParentRoom(room: Room): void;
+    setParentZone(zone: Zone): void;
+    setPropertiesFileName(fileName: string): void;
+}
+
+/** http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/extensions/BaseSFSExtension.html */
+declare class BaseSFSExtension extends ISFSExtension {
+    getApi(): ISFSApi;
+    getCurrentFolder(): string;
+    getGameApi(): ISFSGameApi;
+    handleServerEvent(event: ISFSEvent): void;
+    toString(): string;
+    trace(...params: any[]): void;
+}
+
+declare class SFSExtension extends BaseSFSExtension {
+    static readonly MULTIHANDLER_REQUEST_ID: string;
+    constructor();
+    clearFilters(): void;
+    addFilter(filterName: string, filter: SFSExtensionFilter): void;
+    removeFilter(filterName: string): void;
 }
 
 /** http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/entities/Zone.html */
@@ -1802,7 +1860,15 @@ declare class SFSDBManager extends IDBManager {
 declare class IRoomManager {
 }
 
+/** http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/persistence/room/IRoomStorage.html */
 declare class IRoomStorage {
+    destroy(): void;
+    loadAllRooms(groupId?: string): CreateRoomSettings[];
+    loadRoom(name: string): CreateRoomSettings;
+    removeAllRooms(groupId?: string): void;
+    removeRoom(name: string): void;
+    saveAllRooms(groupId?: string): void;
+    saveRoom(theRoom: Room): void;
 }
 
 declare class IUserManager {
