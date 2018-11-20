@@ -1444,7 +1444,7 @@ declare class UserVariable {
 /** http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/entities/User.html */
 declare class User {
     addCreatedRoom(room: Room): void;
-    addJoinedRomo(romo: Room): void;
+    addJoinedRoom(room: Room): void;
     addPersistentRoomVarReference(target: Room): void;
     containsProperty(key: any): boolean;
     containsVariable(varName: string): boolean;
