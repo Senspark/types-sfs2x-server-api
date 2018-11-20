@@ -1540,21 +1540,28 @@ declare class User {
     removeJoinedRoom(room: Room): void;
 }
 
-declare class UserManager {
+declare class UserManager extends IUserManager {
 }
 
 declare class SFSUser extends User {
 }
 
-declare class Room {
+/** http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/entities/RoomSize.html */
+declare class RoomSize {
+    getSpectatorCount(): number;
+    getTotalUsers(): number;
+    getUserCount(): number;
+    toString(): string;
 }
 
-declare class SFSRoom extends Room {
+/** http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/entities/Room.html */
+declare class Room {
     addUser(user: User, asSpectator?: boolean): void;
     containsProperty(key: any): boolean;
     containsUser(nameOrUser: string | User): boolean;
     containsVariable(varName: string): boolean;
     destroy(): void;
+    getAutoRemoveMode(): SFSRoomRemoveMode;
     getCapacity(): number;
     getDump(): string;
     getExtension(): SFSExtension;
@@ -1569,19 +1576,75 @@ declare class SFSRoom extends Room {
     getPassword(): string;
     getPlayerIdGeneratorClassName(): string;
     getPlayersList(): User[];
-    getRoomVariablesData(globalsOnly: boolean): SFSArray;
-    getSessionList(): Session[];
+    getProperty(key: any): any | null;
+    getRoomVariablesData(globalsOnly: boolean): ISFSArray;
+    getSessionList(): ISession[];
+    getSize(): RoomSize;
     getSpectatorList(): User[];
     getUserById(id: number): User | null;
     getUserByName(name: string): User | null;
     getUserByPlayerId(playerId: number): User | null;
     getUserBySession(session: Session): User | null;
     getUserList(): User[];
-    getUserListData(): SFSArray;
-    getUserManager(): UserManager;
+    getUserListData(): ISFSArray;
+    getUserManager(): IUserManager;
+    getVariable(varName: string): RoomVariable | null;
+    getVariables(): RoomVariable[];
+    getVariablesCount(): number;
+    getVariablesCreatedByUser(user: User): RoomVariable[];
+    getZone(): Zone;
+    isActive(): boolean;
+    isAllowOwnerInvitations(): boolean;
+    isDynamic(): boolean;
+    isEmpty(): boolean;
+    isFlagSet(flag: SFSRoomSettings): boolean;
+    isFull(): boolean;
+    isGame(): boolean;
+    isHidden(): boolean;
+    isPasswordProtected(): boolean;
+    isPublic(): boolean;
+    isUseWordsFilter(): boolean;
+    removePropertpy(key: any): void;
+    removeUser(user: User): void;
+    removeVariable(varName: string): void;
+    removeVariablesCreatedByUser(user: User, isLeaveRoom?: boolean): RoomVariable[];
+    setActive(flag: boolean): void;
+    setAllowOwnerInvitations(flag: boolean): void;
+    setAutoRemoveMode(mode: SFSRoomRemoveMode): void;
+    setCapacity(maxUser: number, maxSpectators: number): void;
+    setDynamic(b: boolean): void;
+    setExtension(extension: ISFSExtension): void;
+    setFlag(flag: SFSRoomSettings, state: boolean): void;
+    setGame(b: boolean): void;
+    setGroupId(group: string): void;
+    setHidden(b: boolean): void;
+    setMaxRoomVariablesAllowed(max: number): void;
+    setMaxSpectators(max: number): void;
+    setMaxUsers(max: number): void;
+    setName(name: string): void;
+    setOwner(user: User): void;
+    setPassword(password: string): void;
+    setProperty(key: any, value: any): void;
+    setUserManager(manager: IUserManager): void;
+    setUseWordsFilter(useWordsFilter: boolean): void;
+    setVariable(roomVariable: RoomVariable): void;
+    setVariables(variables: RoomVariable[], overrideOwnership?: boolean): void;
+    setZone(zone: Zone): void;
+    switchPlayerToSpectator(user: User): void;
+    switchSpectatorToPlayper(user: User): void;
+    toSFSArray(globalVasOnly: boolean): ISFSArray;
 }
 
-declare class SFSExtension {
+/** http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/entities/SFSRoom.html */
+declare class SFSRoom extends Room {
+    constructor(name: string);
+    toString(): string;
+}
+
+declare class ISFSExtension {
+}
+
+declare class SFSExtension extends ISFSExtension {
 }
 
 /** http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/entities/Zone.html */
