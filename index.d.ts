@@ -1438,7 +1438,60 @@ declare class SFSGame extends SFSRoom {
     toString(): string;
 }
 
-declare class UserVariable {
+/** http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/entities/variables/Variable.html */
+declare class Variable {
+    getBoolValue(): boolean | null;
+    getDoubleValue(): number | null;
+    getIntValue(): number | null;
+    getName(): string;
+    getSFSArrayValue(): ISFSArray | null;
+    getSFSObjectValue(): ISFSObject | null;
+    getStringValue(): string | null;
+    getType(): VariableType;
+    getValue(): any;
+    isNull(): boolean;
+    toSFSArray(): ISFSArray;
+}
+
+/**
+ * http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/entities/variables/UserVariable.html
+ */
+declare class UserVariable extends Variable {
+    isHidden(): boolean;
+    isPrivate(): boolean;
+    setHidden(flag: boolean): void;
+    setNull(): void;
+    setPrivate(flag: boolean): void;
+}
+
+/**
+ * http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/entities/variables/RoomVariable.html
+ */
+declare class RoomVariable extends Variable {
+    getOwner(): User;
+    isGlobal(): boolean;
+    isPersistent(): boolean;
+    setGlobal(flag: boolean): void;
+    setOwner(user: User): void;
+    setPersistent(flag: boolean): void;
+}
+
+// tslint:disable-next-line:max-line-length
+/** http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/entities/variables/SFSUserVariable.html */
+declare class SFSUserVariable extends UserVariable {
+    static newFromSFSArray(array: ISFSArray): SFSUserVariable;
+    static newFromStringLiteral(name: string, type: string, literal: string): SFSUserVariable;
+    static newInstance(name: string, value: any): SFSUserVariable;
+    static newPrivateVariable(name: string, value: any): SFSUserVariable;
+    toString(): string;
+}
+
+// tslint:disable-next-line:max-line-length
+/** http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/entities/variables/SFSRoomVariable.html */
+declare class SFSRoomVariable extends RoomVariable {
+    static newFromSFSArray(array: ISFSArray): SFSRoomVariable;
+    static newFromStringLiteral(name: string, type: string, literal: string): SFSRoomVariable;
+    toString(): string;
 }
 
 /** http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/entities/User.html */
@@ -1469,7 +1522,7 @@ declare class User {
     getSession(): ISession;
     getSubscribedGroups(): string[];
     getUserVariablesData(): ISFSArray;
-    getVariable(key: string): UserVariable;
+    getVariable(key: string): UserVariable | null;
     getVariables(): UserVariable[];
     getVariablesCount(): number;
     getZone(): Zone;
