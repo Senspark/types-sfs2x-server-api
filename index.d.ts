@@ -626,6 +626,15 @@ declare function getMMOApi(): MMOApi;
 /**
  * http://docs2x.smartfoxserver.com/api-docs/jsdoc/server/global.html#getParentRoom
  *
+ * Returns the SFSRoom object to which this Extension is attached (for Room-level Extensions only).
+ *
+ * @returns The SFSRoom object to which the Extension is attached, or null if this is not a Room-level Extension.
+ */
+declare function getParentRoom(): SFSRoom | null;
+
+/**
+ * http://docs2x.smartfoxserver.com/api-docs/jsdoc/server/global.html#getParentZone
+ *
  * Returns the SFSZone object which is parent to this Extension.
  *
  * If case of a Zone-level Extension, this method returns its parent Extension; in case of a Room-level Extension, it
@@ -633,7 +642,7 @@ declare function getMMOApi(): MMOApi;
  *
  * @returns The SFSZone object to which the Extension belongs.
  */
-declare function getParentRoom(): SFSRoom;
+declare function getParentZone(): SFSZone;
 
 /**
  * Includes other JavaScript files in the Extension.
