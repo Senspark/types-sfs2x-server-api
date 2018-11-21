@@ -916,6 +916,7 @@ declare class SFSUserVariable {
 
 /**
  * http://docs2x.smartfoxserver.com/api-docs/jsdoc/server/CreateRoomSettings.html
+ * http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/api/CreateRoomSettings.html
  *
  * The CreateRoomSettings class allows to configure how a new Room will work under many different aspects, from its size
  * to the events it can fire, permissions and a lot more.
@@ -923,10 +924,43 @@ declare class SFSUserVariable {
 declare class CreateRoomSettings {
     /** Creates a new CreateRoomSettings instance. */
     constructor();
+
+    allowOwnerOnlyInvitation(): boolean;
+    getAutoRemoveMode(): SFSRoomRemoveMode;
+    getExtension(): RoomExtensionSettings;
+    getGroupId(): string;
+    getMaxSpectators(): number;
+    getMaxUsers(): number;
+    getMaxVariablesAllowed(): number;
+    getName(): string;
+    getPassword(): string;
+    getRoomProperties(): any;
+    getRoomVariables(): RoomVariable[];
+    isDynamic(): boolean;
+    isGame(): boolean;
+    isHidden(): boolean;
+    isUseWordsFilter(): boolean;
+    setAllowOwnerOnlyInvitation(allowOwnerInvitation: boolean): void;
+    setAutoRemoveMode(autoRemoveMode: SFSRoomRemoveMode): void;
+    setDynamic(isDynamic: boolean): void;
+    setExtension(extension: RoomExtensionSettings): void;
+    setGame(isGame: boolean): void;
+    setGroupId(groupId: string): void;
+    setHidden(isHidden: boolean): void;
+    setMaxSpectators(maxSpectators: number): void;
+    setMaxUsers(maxUsers: number): void;
+    setMaxVariablesAllowed(maxVariablesAllowed: number): void;
+    setName(name: string): void;
+    setPassword(password: string): void;
+    setRoomProperties(roomProperties: any): void;
+    setRoomVariables(roomVariables: RoomVariable[]): void;
+    setUseWordsFilter(useWordsFilter: boolean): void;
+    toString(): string;
 }
 
 /**
  * http://docs2x.smartfoxserver.com/api-docs/jsdoc/server/CreateMMORoomSettings.html
+ * http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/mmo/CreateMMORoomSettings.html
  *
  * The CreateMMORoomSettings class extends the basic CreateRoomSettings class adding new functionalities that are unique
  * to an MMORoom.
@@ -940,6 +974,7 @@ declare class CreateMMORoomSettings extends CreateRoomSettings {
 
 /**
  * http://docs2x.smartfoxserver.com/api-docs/jsdoc/server/CreateSFSGameSettings.html
+ * http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/game/CreateSFSGameSettings.html
  *
  * The CreateSFSGameSettings class extends the basic CreateRoomSettings class providing all the settings required to
  * create an SFSGame.
@@ -950,8 +985,32 @@ declare class CreateMMORoomSettings extends CreateRoomSettings {
  * For an introduction to the SFSGame features, see the  SFSGame class documentation.
  */
 declare class CreateSFSGameSettings extends CreateRoomSettings {
+    static newFromRoomSettings(settings: CreateRoomSettings): CreateSFSGameSettings;
+
     /** Creates a new CreateSFSGameSettings instance. */
     constructor();
+
+    getInvitationExpiryTime(): number;
+    getInvitationParams(): ISFSObject;
+    getInvitedPlayers(): User[];
+    getMinPlayersToStartGame(): number;
+    getPlayerMatchExpression(): MatchExpression;
+    getSearchableRooms(): Room[];
+    getSpectatorMatchExpression(): MatchExpression;
+    isGamePublic(): boolean;
+    isLeaveLastJoinedRoom(): boolean;
+    isNotifyGameStartedViaRoomVariable(): boolean;
+    setGamePublic(isGamePublic: boolean): void;
+    setInvitationExpiryTime(invitationExpiryTime: number): void;
+    setInvitationParams(invitationParams: ISFSObject): void;
+    setInvitedPlayers(invitedPlayers: User[]): void;
+    setLeaveLastJoinedRoom(leaveLastJoinedRoom: boolean): void;
+    setMinPlayersToStartGame(minPlayersToStartGame: number): void;
+    setNotifyGameStartedViaRoomVariable(notifyGameStartedWithRoomVariable: boolean): void;
+    setPlayerMatchExpression(playerMatchExpression: MatchExpression): void;
+    setSearchableRooms(searchableRooms: Room[]): void;
+    setSpectatorMatchExpression(spectatorMatchExpression: MatchExpression): void;
+    toString(): string;
 }
 
 /**
