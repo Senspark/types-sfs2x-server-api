@@ -1773,7 +1773,7 @@ declare class Zone {
     resetSystemFilterChain(): void;
     setActive(flag: boolean): void;
     setAllowInvitationsOnlyFOrBuddies(allowInvitationsOnlyForBuddies: boolean): void;
-    setCLientAllowedToOverridRoomEvents(flag: boolean): void;
+    setClientAllowedToOverridRoomEvents(flag: boolean): void;
     setCustomLogin(flag: boolean): void;
     setDefaultGroups(groupIds: string[]): void;
     setDefaultPlayerIdGeneratorClassName(className: string): void;
