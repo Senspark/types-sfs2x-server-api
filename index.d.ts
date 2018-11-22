@@ -1184,7 +1184,7 @@ declare class GameApi {
     createGame(
         zone: SFSZone,
         settings: CreateSFSGameSettings,
-        owner?: SFSUser,
+        owner?: SFSUser | null,
         fireClientEvent?: boolean,
         fireServerEvent?: boolean,
     ): SFSGame;
@@ -1225,7 +1225,7 @@ declare class GameApi {
         invitedUser: SFSUser,
         invitationId: number,
         reply: InvitationResponse,
-        params?: SFSObject,
+        params?: SFSObject | null,
         fireClientEvent?: boolean,
     ): void;
 
@@ -1294,9 +1294,9 @@ declare class SFSApi extends ISFSApi {
     createRoom(
         zone: SFSZone,
         settings: CreateRoomSettings | CreateMMORoomSettings,
-        owner?: SFSUser,
+        owner?: SFSUser | null,
         joinIt?: boolean,
-        roomToLeave?: SFSRoom,
+        roomToLeave?: SFSRoom | null,
         fireClientEvent?: boolean,
         fireServerEvent?: boolean): SFSRoom;
     disconnectSession(session: Session): void;
@@ -1310,9 +1310,9 @@ declare class SFSApi extends ISFSApi {
     joinRoom(
         user: SFSUser,
         roomToJoin: SFSRoom,
-        password?: string,
+        password?: string | null,
         asSpectator?: boolean,
-        roomToLeave?: SFSRoom,
+        roomToLeave?: SFSRoom | null,
         fireClientEvent?: boolean,
         fireServerEvent?: boolean): void;
     kickUser(userToKick: SFSUser, modUser: SFSUser, kickMessage: string, delaySeconds: number): void;
