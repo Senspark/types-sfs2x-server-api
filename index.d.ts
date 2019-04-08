@@ -867,7 +867,7 @@ declare class SFSBuddyVariable {
  * Room Variables are particularly useful to "attach" any custom data to a Room, such as the current game status in a
  * game Room, the topic in chat Room, other Room-specific properties, etc.
  */
-declare class SFSRoomVariable {
+declare class SFSRoomVariable extends RoomVariable {
     /**
      * Creates a new SFSRoomVariable instance.
      *
@@ -895,7 +895,7 @@ declare class SFSRoomVariable {
  * User Variables are particularly useful to assign any custom data to a user, such as his current in-game status,
  * profile data, scoring, etc.
  */
-declare class SFSUserVariable {
+declare class SFSUserVariable extends UserVariable {
     /**
      * Creates a new SFSUserVariable instance.
      *
