@@ -866,8 +866,14 @@ declare class SFSBuddyVariable {
  *
  * Room Variables are particularly useful to "attach" any custom data to a Room, such as the current game status in a
  * game Room, the topic in chat Room, other Room-specific properties, etc.
+ * 
+ * tslint:disable-next-line:max-line-length
+ * http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/entities/variables/SFSRoomVariable.html
  */
 declare class SFSRoomVariable extends RoomVariable {
+    static newFromSFSArray(array: ISFSArray): SFSRoomVariable;
+    static newFromStringLiteral(name: string, type: string, literal: string): SFSRoomVariable;
+
     /**
      * Creates a new SFSRoomVariable instance.
      *
@@ -884,6 +890,8 @@ declare class SFSRoomVariable extends RoomVariable {
         name: string,
         value: boolean | number | string | SFSArray | SFSObject | null,
         type?: VariableType);
+
+    toString(): string;
 }
 
 /**
@@ -894,8 +902,16 @@ declare class SFSRoomVariable extends RoomVariable {
  *
  * User Variables are particularly useful to assign any custom data to a user, such as his current in-game status,
  * profile data, scoring, etc.
+ * 
+ * tslint:disable-next-line:max-line-length
+ * http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/entities/variables/SFSUserVariable.html
  */
 declare class SFSUserVariable extends UserVariable {
+    static newFromSFSArray(array: ISFSArray): SFSUserVariable;
+    static newFromStringLiteral(name: string, type: string, literal: string): SFSUserVariable;
+    static newInstance(name: string, value: any): SFSUserVariable;
+    static newPrivateVariable(name: string, value: any): SFSUserVariable;
+
     /**
      * Creates a new SFSUserVariable instance.
      *
@@ -912,6 +928,8 @@ declare class SFSUserVariable extends UserVariable {
         name: string,
         value: boolean | number | string | SFSArray | SFSObject | null,
         type?: VariableType);
+
+    toString(): string;
 }
 
 /**
@@ -1539,24 +1557,6 @@ declare class RoomVariable extends Variable {
     setGlobal(flag: boolean): void;
     setOwner(user: User): void;
     setPersistent(flag: boolean): void;
-}
-
-// tslint:disable-next-line:max-line-length
-/** http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/entities/variables/SFSUserVariable.html */
-declare class SFSUserVariable extends UserVariable {
-    static newFromSFSArray(array: ISFSArray): SFSUserVariable;
-    static newFromStringLiteral(name: string, type: string, literal: string): SFSUserVariable;
-    static newInstance(name: string, value: any): SFSUserVariable;
-    static newPrivateVariable(name: string, value: any): SFSUserVariable;
-    toString(): string;
-}
-
-// tslint:disable-next-line:max-line-length
-/** http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/entities/variables/SFSRoomVariable.html */
-declare class SFSRoomVariable extends RoomVariable {
-    static newFromSFSArray(array: ISFSArray): SFSRoomVariable;
-    static newFromStringLiteral(name: string, type: string, literal: string): SFSRoomVariable;
-    toString(): string;
 }
 
 /** http://docs2x.smartfoxserver.com/api-docs/javadoc/server/com/smartfoxserver/v2/entities/User.html */
