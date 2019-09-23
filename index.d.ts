@@ -671,7 +671,7 @@ declare function include(scriptPath: string): void;
  * @param recipients An array of SFSUser objects identifying the recipients of the message.
  * @param isUdp If true, the message will be sent using the UDP protocol.
  */
-declare function send(cmdName: string, params: SFSObject, recipients: SFSUser[], isUdp?: boolean): void;
+declare function send(cmdName: string, params: SFSObject | null, recipients: SFSUser[], isUdp?: boolean): void;
 
 /**
  * http://docs2x.smartfoxserver.com/api-docs/jsdoc/server/global.html#setThreadSafe
@@ -1329,7 +1329,7 @@ declare class SFSApi extends ISFSApi {
     sendPrivateMessage(sender: SFSUser, recipient: SFSUser, message: string, params?: SFSObject): void;
     sendPublicMessage(targetRoom: SFSRoom, sender: SFSUser, message: string, params?: SFSObject): void;
     setRoomVariables(
-        user: SFSUser,
+        user: SFSUser | null,
         targetRoom: SFSRoom,
         variables: SFSRoomVariable[],
         fireClientEvent?: boolean,
